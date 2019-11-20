@@ -56,7 +56,7 @@ function getAllMigrationScripts(): string[] {
   return fs
     .readdirSync(migrationsFolder)
     .sort((a, b) => a.localeCompare(b))
-    .map(f => path.join("..", migrationsFolder, f));
+    .map(f => path.join(__dirname, "..", migrationsFolder, f));
 }
 
 function getPendingMigrations(migrations: string[], currentVersion: string) {
@@ -88,13 +88,14 @@ function addMigrationInfo(
 }
 
 export function archiveFile(filename: string, version: Version) {
-  const archiveDir = "./archive";
+  const archiveDir = path.join(__dirname, "..", "archive");
+
   if (!fs.existsSync(archiveDir)) {
-    fs.mkdirSync("archive");
+    fs.mkdirSync(archiveDir);
   }
   fs.copyFileSync(
     filename,
-    path.join("./archive", `${version}_${path.basename(filename)}`)
+    path.join(archiveDir, `${version}_${path.basename(filename)}`)
   );
   fs.unlinkSync(filename);
 }

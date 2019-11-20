@@ -1,4 +1,4 @@
-export default function(file: any): any {
+export default function(file) {
   const depAStatus = file.departmentA.status;
   file.departmentA.status = [depAStatus];
 

@@ -1,4 +1,4 @@
-export default function(file: any): any {
+export default function(file) {
   return {
     ...file,
     departmentA: {
